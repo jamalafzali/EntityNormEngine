@@ -31,6 +31,7 @@ def min_edit_distance(phrase1, phrase2):
             min_dist = min(min_dist, dist)
     return min_dist
 
-## Testing
+# ## Testing
 # print(min_edit_distance("LONDON GBR", "LONDON ENG"))
 # print(min_edit_distance("LONDON GBR", "LDN"))
+# print(min_edit_distance("ASIA", "LDN"))
