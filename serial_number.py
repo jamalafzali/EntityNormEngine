@@ -1,6 +1,29 @@
 import re
 
 class SerialClusters():
+    """
+    Class representing serial number clusters.
+    
+    ...
+
+    Attributes
+    ----------
+    clusters : list
+        Contains all clusters.
+    clean_clusters : list
+        Copy of clusters but each entry is replaced with a cleaned version.
+    
+    Methods
+    -------
+    add_entry(new_serial)
+        Given a new entry, cleans the entry and tries to find a match
+        with the existing clean clusters. If found, adds original and clean
+        names to their respective clusters, otherwise makes a new cluster.
+    
+    get_clusters()
+        Returns clusters.
+    
+    """
     def __init__(self):
         self.clusters = []
         self.clean_clusters = []

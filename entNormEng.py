@@ -4,18 +4,70 @@ from locations import LocationClusters
 from company_name import CompanyClusters
 
 class EntNormEng():
+    """
+    Entity Normalization Engine class.
+    
+    ...
+
+    Attributes
+    ----------
+    clustDict : dict
+        dictionary containing numerical mapping of input types
+    clusters : list
+        list containing each input types cluster object
+
+    
+    Methods
+    -------
+    add_entry(sample, sample_type)
+        Classifies sample into one of the cluster types, and then attempts to
+        cluster it by calling that type's object's add_entry method.
+        NOTE: For now, we need to manually enter in the sample_type
+
+    print_clusters()
+        Concatenates all cluster types and prints the list
+    """
+
     def __init__(self):
+        """
+        Parameters
+        ----------
+        clustDict : dict
+            dictionary containing numerical mapping of input types
+        clusters : list
+            list containing each input types cluster object
+        """
         self.clustDict = {'serial': 0, 'good': 1, 'location': 2, 'company': 3}
         self.clusters = [SerialClusters(), GoodsClusters(), LocationClusters(), CompanyClusters()]
 
 
-    def add_entry(self, x, sample_type):
+    def add_entry(self, sample, sample_type):
+        """
+        Classifies sample into one of the input types, and then attempts to
+        cluster it by calling that type's object's add_entry method.
+        NOTE: For now, we need to manually enter in the sample_type
+
+        Parameters
+        ----------
+        sample : str
+            The input sample
+        sample_type : str
+            The input sample's type. Type should match one of the entries in
+            clustDict. 
+            NOTE: This wil be removed when classifier is built.
+
+        """
+
         # Need a classifier to auto get the sample_type
         # sample_type = classify(x)
 
-        self.clusters[self.clustDict[sample_type]].add_entry(x)
+        self.clusters[self.clustDict[sample_type]].add_entry(sample)
         
     def print_clusters(self):
+        """
+        Concatenates all cluster types and prints the list.
+        """
+
         total_clusters = []
         for cluster in self.clusters:
            total_clusters +=  cluster.get_clusters()

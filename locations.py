@@ -6,7 +6,47 @@ import pandas as pd
 import re
 
 class LocationClusters():
+    """
+    Class representing location clusters.
+    
+    ...
+
+    Attributes
+    ----------
+    clusters : list
+        Contains all clusters.
+    clean_clusters : list
+        Copy of clusters but each entry is replaced with a cleaned version.
+    codeToCountry : dict
+        Mapping of country code to country e.g. "USA" : "United States"
+
+    Methods
+    -------
+    add_entry(new_loc)
+        Given a new entry, cleans the entry and tries to find a match
+        with the existing clean clusters. If found, adds original and clean
+        names to their respective clusters, otherwise makes a new cluster.
+    
+    get_clusters()
+        Returns clusters.
+    
+    clean_location(company)
+        Converts company names to upper case and removes any punctuation.
+        Replaces any country codes to their full names.
+
+    """
+
     def __init__(self):
+        """
+        Attributes
+        ----------
+        clusters : list
+            Contains all clusters.
+        clean_clusters : list
+            Copy of clusters but each entry is replaced with a cleaned version.
+        codeToCountry : dict
+            Mapping of country code to country e.g. "USA" : "United States"
+        """
         self.clusters = []
         self.clean_clusters = []
 
@@ -14,7 +54,12 @@ class LocationClusters():
         cities_df = pd.read_csv('./worldcities.csv')
         self.codeToCountry = pd.Series(cities_df.country.values, index=cities_df.iso3).to_dict()
 
-    def clean_location(self, location):  
+    def clean_location(self, location):
+        """
+        Converts company names to upper case and removes any punctuation.
+        Replaces any country codes to their full names.
+        Returns the cleaned location.
+        """  
         # Remove punctuation
         location = re.sub(r'[^\w\s]', '', location)
         
@@ -27,6 +72,11 @@ class LocationClusters():
         return " ".join(location_split)
 
     def add_entry(self, new_loc):
+        """
+        Given a new entry, cleans the entry and tries to find a match
+        with the existing clean clusters. If found, adds original and clean
+        names to their respective clusters, otherwise makes a new cluster.
+        """
         clean_loc = self.clean_location(new_loc)
 
         i = clustering_with_edit_dist(clean_loc, self.clean_clusters)
@@ -50,27 +100,3 @@ class LocationClusters():
 #     lC.add_entry(loc)
 # print(lC.get_clusters())
 # print(lC.clean_clusters)
-
-
-
-
-# def clean_location(location):
-#     # Convert abbreviations to full names
-#     cities_df = pd.read_csv('./worldcities.csv')
-#     codeToCountry = pd.Series(cities_df.country.values, index=cities_df.iso3).to_dict()
-    
-#     location_split = location.upper().split()
-#     for i in range(len(location_split)):
-#         if location_split[i] in codeToCountry:
-#             location_split[i] = codeToCountry[location_split[i]].upper()
-#     return " ".join(location_split)
-
-# def location_clusters(locations):
-#     # Clean each location
-#     cleaned_locations = list(map(clean_location, locations))
-#     clusters = clustering_with_edit_dist(locations, cleaned_locations)
-#     return clusters
-
-# ### Testing
-# x = ["London", "LDN", "ASIA", "US", "United Kingdom", "United States", "GBR"]
-# print(location_clusters(x))
