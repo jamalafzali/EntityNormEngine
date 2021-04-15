@@ -50,5 +50,5 @@ class SerialClusters():
 # sC = SerialClusters()
 # serials = ['XYZ 12345 / ILD', 'ABC/ICL/29189NC', 'XY Z12 345 //// ILD', 'ABC...ICL--291-89N C']
 # for serial in serials:
-#     sC.serial_cluster(serial)
+#     sC.add_entry(serial)
 # print(sC.get_clusters())

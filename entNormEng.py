@@ -2,6 +2,7 @@ from serial_number import SerialClusters
 from physical_goods import GoodsClusters
 from locations import LocationClusters
 from company_name import CompanyClusters
+from addresses import AddressClusters
 
 class EntNormEng():
     """
@@ -37,8 +38,8 @@ class EntNormEng():
         clusters : list
             list containing each input types cluster object
         """
-        self.clustDict = {'serial': 0, 'good': 1, 'location': 2, 'company': 3}
-        self.clusters = [SerialClusters(), GoodsClusters(), LocationClusters(), CompanyClusters()]
+        self.clustDict = {'serial': 0, 'good': 1, 'location': 2, 'company': 3, 'address': 4}
+        self.clusters = [SerialClusters(), GoodsClusters(), LocationClusters(), CompanyClusters(), AddressClusters()]
 
 
     def add_entry(self, sample, sample_type):
@@ -70,7 +71,7 @@ class EntNormEng():
 
         total_clusters = []
         for cluster in self.clusters:
-           total_clusters +=  cluster.get_clusters()
+           total_clusters += cluster.get_clusters()
         print(total_clusters)
 
 
@@ -82,9 +83,11 @@ class EntNormEng():
 # entNorm.add_entry("ASIA", 'location')
 # entNorm.add_entry("12345////", 'serial')
 # entNorm.add_entry("London", 'location')
+# entNorm.add_entry("Imperial College London", 'address')
 # entNorm.add_entry("NVIDIA Ireland", 'company')
 # entNorm.add_entry("plastic Chair", 'good')
 # entNorm.add_entry("M&S Limited", 'company')
+# entNorm.add_entry("SW7 2AZ", 'address')
 # entNorm.add_entry("LDN, GBR", 'location')
 # entNorm.add_entry("12345sds////", 'serial')
 
