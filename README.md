@@ -18,5 +18,5 @@ Please note that currently we must pass an additional *sample_type* input to the
 * '*good*'
 * '*location*'
 * '*company*'
-* '*address*' (TBA)
+* '*address*'
 
