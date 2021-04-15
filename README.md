@@ -13,7 +13,7 @@ entNorm.add_entry("12345", 'serial')
 entNorm.add_entry("plastic bottle", 'good')
 entNorm.add_entry("Marks and Spencers Ltd", 'company')
 ```
-Please note that currently we must pass an additional *sample_type* input to the add_entry method. This classification will be done automatically in future. The allowed *sample_types* are as follows:
+Please note that currently we must pass an additional *sample_type* input to the `add_entry()` method. This classification will be done automatically in future. The allowed *sample_types* are as follows:
 * '*serial*'
 * '*good*'
 * '*location*'
