@@ -31,16 +31,20 @@ sgd = Pipeline([('vect', CountVectorizer()),
                ])
 sgd.fit(X_train, y_train)
 
-
-y_pred = sgd.predict(X_test)
-
-print('accuracy %s' % accuracy_score(y_pred, y_test))
-print(classification_report(y_test, y_pred,target_names=my_tags))
-
-inputs = ["Plastic Bottle", "Dining Table", "4 Watermill Way, Feltham, TW13 5NG", "Marks and Spencers LTD", "Slough SE12 3XY", "United Kingdom", "LSG4455-rew-fd78fffd"]
-for sample_input in inputs:
+def classify(sample_input):
     pred = val_to_label[sgd.predict([sample_input])[0]]
-    print('{:<8} => {:<15}'.format(pred, sample_input))
+    print("Predicted label for", sample_input, "is:", pred)
+    return pred.lower()
+
+# y_pred = sgd.predict(X_test)
+
+# print('accuracy %s' % accuracy_score(y_pred, y_test))
+# print(classification_report(y_test, y_pred,target_names=my_tags))
+
+# inputs = ["Plastic Bottle", "Dining Table", "4 Watermill Way, Feltham, TW13 5NG", "Marks and Spencers LTD", "Slough SE12 3XY", "United Kingdom", "LSG4455-rew-fd78fffd"]
+# for sample_input in inputs:
+#     pred = val_to_label[sgd.predict([sample_input])[0]]
+#     print('{:<8} => {:<15}'.format(pred, sample_input))
 
 # from sklearn.naive_bayes import MultinomialNB
 # from sklearn.pipeline import Pipeline
