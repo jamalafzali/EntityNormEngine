@@ -7,17 +7,26 @@ from sklearn.feature_extraction.text import CountVectorizer, TfidfVectorizer
 from sklearn.metrics import accuracy_score, confusion_matrix, classification_report
 from sklearn.feature_extraction.text import TfidfTransformer
 
+######################
+# Data preprocessing #
+######################
+
+# Load data
 df = pd.read_csv('./TextClassData.csv')
 df = df.sample(frac=1).reset_index(drop=True) # Shuffle
 df = df.applymap(lambda s:s.upper() if type(s) == str else s) # Convert everything to upper
 
-
+# Clean labels
 labels_dict = {"Label": {'COMPANY': 0, 'ADDRESS': 1, 'LOCATION': 2, 'SERIAL': 3, 'GOOD': 4}}
 df = df.replace(labels_dict)
 
+# Get reverse mapping
 my_map = {'COMPANY': 0, 'ADDRESS': 1, 'LOCATION': 2, 'SERIAL': 3, 'GOOD': 4}
 val_to_label = dict(map(reversed, my_map.items()))
 
+############
+# Training #
+############
 X = df.Text
 y = df.Label
 
@@ -25,16 +34,18 @@ X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3)
 
 my_tags = ['ADDRESS', 'COMPANY', 'LOCATION', 'SERIAL', 'GOOD']
 
+# Using SGD Classifier
 sgd = Pipeline([('vect', CountVectorizer()),
                 ('tfidf', TfidfTransformer()),
                 ('clf', SGDClassifier(loss='hinge', penalty='l2',alpha=1e-3, random_state=42, max_iter=5, tol=None)),
                ])
 sgd.fit(X_train, y_train)
 
-def classify(sample_input):
-    pred = val_to_label[sgd.predict([sample_input])[0]]
-    print("Predicted label for", sample_input, "is:", pred)
-    return pred.lower()
+
+# def classify(sample_input):
+#     pred = val_to_label[sgd.predict([sample_input])[0]]
+#     print("Predicted label for", sample_input, "is:", pred)
+#     return pred.lower()
 
 # y_pred = sgd.predict(X_test)
 
