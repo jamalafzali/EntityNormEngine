@@ -126,10 +126,10 @@ class GoodsClusters():
         return self.clusters
 
         
-## Will need to download some required files when running for the first time
-# ## Testing
-# gC = GoodsClusters()
-# goods = ["hardwoord table", "Jon Snow", "Sword", "plastic bottle", "Daenerys Targaryen", "Dining Table", "chair", "Iron helmet","Coke Bottle", "Wooden Spoons"]
-# for good in goods:
-#     gC.add_entry(good)
-# print(gC.get_clusters())
+# Will need to download some required files when running for the first time
+## Testing
+gC = GoodsClusters()
+goods = ["hardwoord table", "Jon Snow", "Sword", "plastic bottle", "Daenerys Targaryen", "Dining Table", "chair", "Iron helmet","Coke Bottle", "Wooden Spoons"]
+for good in goods:
+    gC.add_entry(good)
+print(gC.get_clusters())

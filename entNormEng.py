@@ -3,6 +3,7 @@ from physical_goods import GoodsClusters
 from locations import LocationClusters
 from company_name import CompanyClusters
 from addresses import AddressClusters
+from classification import classify
 
 class EntNormEng():
     """
@@ -42,7 +43,7 @@ class EntNormEng():
         self.clusters = [SerialClusters(), GoodsClusters(), LocationClusters(), CompanyClusters(), AddressClusters()]
 
 
-    def add_entry(self, sample, sample_type):
+    def add_entry(self, sample, sample_type=''):
         """
         Classifies sample into one of the input types, and then attempts to
         cluster it by calling that type's object's add_entry method.
@@ -60,7 +61,8 @@ class EntNormEng():
         """
 
         # Need a classifier to auto get the sample_type
-        # sample_type = classify(x)
+        if sample_type == '':
+            sample_type = classify(sample)
 
         self.clusters[self.clustDict[sample_type]].add_entry(sample)
         
@@ -75,7 +77,7 @@ class EntNormEng():
         print(total_clusters)
 
 
-# ### Testing
+# ### Testing - with provided labels
 # entNorm = EntNormEng()
 # entNorm.add_entry("12345", 'serial')
 # entNorm.add_entry("plastic bottle", 'good')
@@ -93,6 +95,23 @@ class EntNormEng():
 
 # entNorm.print_clusters()
 
+### Testing - With automatic labels
+entNorm = EntNormEng()
+entNorm.add_entry("12345")
+entNorm.add_entry("plastic bottle")
+entNorm.add_entry("Marks and Spencers Ltd")
+entNorm.add_entry("ASIA")
+entNorm.add_entry("12345////")
+entNorm.add_entry("London")
+entNorm.add_entry("Imperial College London")
+entNorm.add_entry("M&S Limited")
+# entNorm.add_entry("NVIDIA Ireland", 'company')
+# entNorm.add_entry("plastic Chair", 'good')
+# entNorm.add_entry("M&S Limited", 'company')
+# entNorm.add_entry("SW7 2AZ", 'address')
+# entNorm.add_entry("LDN, GBR", 'location')
+# entNorm.add_entry("12345sds////", 'serial')
 
+entNorm.print_clusters()
     
 
