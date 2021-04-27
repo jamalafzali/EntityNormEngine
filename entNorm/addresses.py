@@ -54,10 +54,10 @@ class AddressClusters():
         self.clusters = []
         self.clean_clusters = []
 
-        countries_df = pd.read_csv('./worldcities.csv')['country']
+        countries_df = pd.read_csv('./data/worldcities.csv')['country']
         self.countriesSet = set(countries_df.unique())
 
-        cities_df = pd.read_csv('./worldcities.csv')['city']
+        cities_df = pd.read_csv('./data/worldcities.csv')['city']
         self.citiesSet = set(cities_df.unique())
 
     def add_entry(self, new_addr):
