@@ -9,11 +9,14 @@ After instantiating the `EntNormEng()` class, we can simply call the `add_entry(
 entNorm = EntNormEng()
 
 # Add entries like this
-entNorm.add_entry("12345", 'serial')
-entNorm.add_entry("plastic bottle", 'good')
-entNorm.add_entry("Marks and Spencers Ltd", 'company')
+entNorm.add_entry("12345")
+entNorm.add_entry("plastic bottle")
+entNorm.add_entry("Marks and Spencers Ltd")
 ```
-Please note that currently we must pass an additional *sample_type* input to the `add_entry()` method. This classification will be done automatically in future. The allowed *sample_types* are as follows:
+
+Please note that the `add_entry()` method can also take an additional *sample_type* argument for testing of each type's normalisation algorithm.
+For example `entNorm.add_entry("Marks and Spencers", "company")`.
+The allowed *sample_types* are as follows:
 * '*serial*'
 * '*good*'
 * '*location*'
