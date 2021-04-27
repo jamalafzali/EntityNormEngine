@@ -51,7 +51,7 @@ class LocationClusters():
         self.clean_clusters = []
 
         # Dict to convert abbreviations
-        cities_df = pd.read_csv('./worldcities.csv')
+        cities_df = pd.read_csv('./data/worldcities.csv')
         self.codeToCountry = pd.Series(cities_df.country.values, index=cities_df.iso3).to_dict()
 
     def clean_location(self, location):
