@@ -50,7 +50,7 @@ class EntNormEng():
         self.val_to_label = {0: 'company', 1: 'address', 2: 'location', 3: 'serial', 4: 'good'}
 
         # Loading classifier model
-        filename = 'entity_classifier.pickle'
+        filename = 'entNorm/entity_classifier.pickle'
         self.classifier = pickle.load(open(filename, 'rb'))
 
 
